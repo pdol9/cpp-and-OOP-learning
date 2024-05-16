@@ -1,0 +1,78 @@
+In C++98, the standard library provides different containers such as arrays, vectors, lists, and maps. Sorting algorithms can be implemented for each container using the sort() function provided by the algorithm library. Here is an example of how to implement a sorting algorithm for an array of integers:
+
+```
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main()
+{
+    int arr[] = { 5, 2, 7, 1, 8, 3 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    sort(arr, arr + n);
+
+    cout << "Sorted array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+The sort() function takes two iterators as parameters, which define the range of elements to be sorted. In this example, the range is defined by the pointers arr and arr + n, which point to the first and last elements of the array, respectively. The sort() function will sort the elements in ascending order by default.
+
+For other containers such as vectors and lists, the sort() function can be used in a similar way. Here is an example of how to sort a vector of integers:
+```
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+int main()
+{
+    vector<int> vec = { 5, 2, 7, 1, 8, 3 };
+
+    sort(vec.begin(), vec.end());
+
+    cout << "Sorted vector: ";
+    for (int i = 0; i < vec.size(); i++) {
+        cout << vec[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+The sort() function is called with the begin() and end() iterators of the vector as parameters. This will sort the elements in ascending order.
+
+For maps, the sort() function cannot be used directly, as maps are sorted by their keys by default. However, the values in a map can be sorted using a custom comparator function. Here is an example of how to sort a map of integers by their values:
+```
+#include <iostream>
+#include <algorithm>
+#include <map>
+using namespace std;
+
+bool compare(const pair<int, int>& a, const pair<int, int>& b)
+{
+    return a.second < b.second;
+}
+
+int main()
+{
+    map<int, int> mp = { { 1, 5 }, { 2, 2 }, { 3, 7 }, { 4, 1 }, { 5, 8 }, { 6, 3 } };
+    vector<pair<int, int> > vec(mp.begin(), mp.end());
+
+    sort(vec.begin(), vec.end(), compare);
+
+    cout << "Sorted map by values: ";
+    for (int i = 0; i < vec.size(); i++) {
+        cout << vec[i].first << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+The compare() function takes two pairs of integers as parameters and compares their second values. The mp map is copied to a vector of pairs, which can be sorted using the sort() function with the compare() function as a custom comparator. The resulting sorted vector can then be used to access the keys of the map in order of their values.
